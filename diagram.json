@@ -1,0 +1,122 @@
+{
+  "version": 1,
+  "author": "Smart Glasses Team",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-esp32-devkit-v1",
+      "id": "esp",
+      "top": 20,
+      "left": 20,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-hc-sr04",
+      "id": "sonar1",
+      "top": 40,
+      "left": 360,
+      "attrs": { "distance": "120" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btnRead",
+      "top": 180,
+      "left": 350,
+      "attrs": { "color": "green", "label": "VOICE: READ" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btnObject",
+      "top": 250,
+      "left": 470,
+      "attrs": { "color": "yellow", "label": "VOICE: OBJECT" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btnSOS",
+      "top": 320,
+      "left": 590,
+      "attrs": { "color": "red", "label": "VOICE: SOS" }
+    },
+    {
+      "type": "wokwi-buzzer",
+      "id": "buzzer1",
+      "top": 150,
+      "left": 120,
+      "attrs": { "volume": "0.4" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "ledGreen",
+      "top": 270,
+      "left": 130,
+      "attrs": { "color": "green" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "ledRed",
+      "top": 270,
+      "left": 210,
+      "attrs": { "color": "red" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "rGreen",
+      "top": 320,
+      "left": 125,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "rRed",
+      "top": 320,
+      "left": 205,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "rEcho1",
+      "top": 125,
+      "left": 400,
+      "rotate": 90,
+      "attrs": { "value": "1000" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "rEcho2",
+      "top": 180,
+      "left": 400,
+      "rotate": 90,
+      "attrs": { "value": "2000" }
+    }
+  ],
+  "connections": [
+    ["sonar1:VCC", "esp:VIN", "red", []],
+    ["sonar1:GND", "esp:GND.2", "black", []],
+    ["sonar1:TRIG", "esp:D5", "green", []],
+    ["sonar1:ECHO", "rEcho1:1", "orange", []],
+    ["rEcho1:2", "rEcho2:1", "orange", []],
+    ["rEcho1:2", "esp:D18", "orange", []],
+    ["rEcho2:2", "esp:GND.2", "black", []],
+
+    ["btnRead:1.l", "esp:D32", "green", []],
+    ["btnRead:2.l", "esp:GND.1", "black", []],
+    ["btnObject:1.l", "esp:D33", "yellow", []],
+    ["btnObject:2.l", "esp:GND.1", "black", []],
+    ["btnSOS:1.l", "esp:D27", "red", []],
+    ["btnSOS:2.l", "esp:GND.1", "black", []],
+
+    ["buzzer1:2", "esp:D19", "purple", []],
+    ["buzzer1:1", "esp:GND.1", "black", []],
+
+    ["esp:D25", "rGreen:1", "green", []],
+    ["rGreen:2", "ledGreen:A", "green", []],
+    ["ledGreen:C", "esp:GND.1", "black", []],
+    ["esp:D26", "rRed:1", "red", []],
+    ["rRed:2", "ledRed:A", "red", []],
+    ["ledRed:C", "esp:GND.1", "black", []]
+  ],
+  "serialMonitor": {
+    "display": "terminal"
+  }
+}
